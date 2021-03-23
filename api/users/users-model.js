@@ -11,7 +11,7 @@ const db = require("../../data/db-config.js");
 function find() {
   return db("users")
     .select("user_id", "username", "role_name")
-    .join("roles", "users.role_id", "roles.role_id");
+    .join("roles", "users.role_id", "=", "roles.role_id");
 
   /**
     You will need to join two tables.
@@ -42,7 +42,7 @@ function find() {
 
 function findBy(filter) {
   return db("users as u")
-    .join("roles as r", "u.role_id", "r.role_id")
+    .join("roles as r", "u.role_id", "=", "r.role_id")
     .select("u.user_id", "u.username", "u.password", "r.role_name")
     .where("u.username", filter);
 
@@ -72,7 +72,7 @@ function findBy(filter) {
 function findById(user_id) {
   return db("users as u")
     .select("u.user_id", "u.username", "r.role_name")
-    .join("roles as r", "u.role_id", "r.role_id")
+    .join("roles as r", "u.role_id", "=", "r.role_id")
     .where("u.user_id", user_id)
     .first();
 

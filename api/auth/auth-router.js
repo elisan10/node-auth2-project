@@ -8,9 +8,9 @@ const User = require("../users/users-model");
 router.post("/register", validateRoleName, (req, res, next) => {
   const newUser = req.body;
 
-  // const rounds = process.env.BCRYPT_ROUNDS || 8;
-  // const hash = bcryptjs.hashSync(newUser.password, rounds);
-  // newUser.password = hash;
+  const rounds = process.env.BCRYPT_ROUNDS || 8;
+  const hash = bcryptjs.hashSync(newUser.password, rounds);
+  newUser.password = hash;
 
   User.add(newUser)
     .then((newUser) => {

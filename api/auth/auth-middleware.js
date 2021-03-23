@@ -79,7 +79,7 @@ const checkUsernameExists = (req, res, next) => {
 
 const validateRoleName = (req, res, next) => {
   const roleName = req.body.role_name;
-  const trim = roleName.trim();
+  const trim = req.body.role_name.trim();
 
   if (!roleName || trim === "") {
     req.role_name = "student";
@@ -90,7 +90,7 @@ const validateRoleName = (req, res, next) => {
       .status(422)
       .json({ message: "Role name can not be longer than 32 chars" });
   } else {
-    req.role_id = trim;
+    req.body.role_name = trim;
     next();
   }
   /*
